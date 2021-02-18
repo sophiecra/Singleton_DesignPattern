@@ -15,18 +15,29 @@ public class Library {
     }
 
     public boolean checkoutBook(String bookName) {
-        int previousValue = books.value(bookName);
-        if(previousValue > 0) {
-            previousValue -= 1;
+        int numCopies = books.get(bookName);
+        if(numCopies > 0)
+        {
+            numCopies -= 1;
+            books.put(bookName, numCopies);
+            return true;
+        } else {
+            return false;
         }
-        books.put(bookName, previousValue);
     }
 
     public void checkInBook(String bookName, int numToAdd) {
+        int numCopies = numToAdd + books.get(bookName);
         books.put(bookName, numToAdd);
     }
 
     public void displayBooks() {
-        int previousValue = books.
+        Iterator bookIterator = books.entrySet().iterator();
+        System.out.println("Inventory: ");
+        while(bookIterator.hasNext()) {
+            Map.Entry mapElement = (Map.Entry)bookIterator.next();
+            int numCopies = ((int)mapElement.getValue());
+            System.out.println("- " + mapElement.getKey() + ": " + numCopies);
+        }
     }
 }
