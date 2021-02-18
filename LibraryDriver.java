@@ -1,5 +1,3 @@
-public package csce247.assignments.singelton;
-
 public class LibraryDriver {
 
 	public void runLibrary() {
