@@ -28,7 +28,7 @@ public class Library {
 
     public void checkInBook(String bookName, int numToAdd) {
         int numCopies = numToAdd + books.get(bookName);
-        books.put(bookName, numToAdd);
+        books.put(bookName, numCopies);
     }
 
     public void displayBooks() {
