@@ -31,15 +31,14 @@ public class Library {
             books.put(bookName, books.get(bookName) + numToAdd);
         } else {
             books.put(bookName, numToAdd);
-            System.out.println(bookName + " was added to the library.");
+            System.out.println("A new copy of " + bookName + " was added to the library.");
         }
     }
 
     public void displayBooks() {
-        Iterator bookIterator = books.entrySet().iterator();
         System.out.println("Inventory: ");
-        for(String i : books.keySet()) {
-            System.out.println("Title: " + i + " Copies: " + books.get(i));
+        for (String i : books.keySet()) {
+            System.out.println("- " + i + ", copies: " + books.get(i));
         }
     }
 }
