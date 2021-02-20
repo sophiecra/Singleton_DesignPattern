@@ -1,7 +1,7 @@
 
-import java.util.*;
+import java.util.HashMap;
 public class Library {
-    private HashMap<String, Integer> books;
+    private HashMap<String, Integer> books = new HashMap<String, Integer>();
     private static Library library;
 
     private Library() {}
@@ -15,29 +15,30 @@ public class Library {
     }
 
     public boolean checkoutBook(String bookName) {
-        int numCopies = books.get(bookName);
-        if(numCopies > 0)
+        if(books.containsKey(bookName) && books.get(bookName) > 0)
         {
-            numCopies -= 1;
-            books.put(bookName, numCopies);
+            books.put(bookName, books.get(bookName) - 1);
+            System.out.println(bookName + " was successfully checked out.");
             return true;
         } else {
+            System.out.println("Sorry, " + bookName + " is not in stock.");
             return false;
         }
     }
 
     public void checkInBook(String bookName, int numToAdd) {
-        int numCopies = numToAdd + books.get(bookName);
-        books.put(bookName, numCopies);
+        if(books.containsKey(bookName)) {
+            books.put(bookName, books.get(bookName) + numToAdd);
+        } else {
+            books.put(bookName, numToAdd);
+            System.out.println(bookName + " was added to the library.");
+        }
     }
 
     public void displayBooks() {
         Iterator bookIterator = books.entrySet().iterator();
         System.out.println("Inventory: ");
-        while(bookIterator.hasNext()) {
-            Map.Entry mapElement = (Map.Entry)bookIterator.next();
-            int numCopies = ((int)mapElement.getValue());
-            System.out.println("- " + mapElement.getKey() + ": " + numCopies);
+        for(String i : books.keySet()) {
+            System.out.println("Title: " + i + " Copies: " + books.get(i));
         }
-    }
 }
